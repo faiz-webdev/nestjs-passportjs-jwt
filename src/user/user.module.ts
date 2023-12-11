@@ -10,7 +10,7 @@ import { ConfigService } from '@nestjs/config';
 })
 export class UserModule {
   constructor(private readonly configService: ConfigService) {
-    console.log('user module', configService.get<Number>('PORT'));
-    console.log('user module', configService.get<string>('NAME'));
+    // console.log('user module', configService.get<Number>('PORT'));
+    // console.log('user module', configService.get<string>('NAME'));
   }
 }
