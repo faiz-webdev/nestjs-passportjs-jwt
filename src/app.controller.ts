@@ -1,6 +1,8 @@
 import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './user/auth/auth.service';
+import { RoleGuard } from './role.guard';
+import { CONSTANTS } from './constants';
 
 @Controller('app')
 export class AppController {
@@ -14,8 +16,14 @@ export class AppController {
   }
 
   @Get('/android-developer')
-  @UseGuards(AuthGuard('jwt'))
+  @UseGuards(AuthGuard('jwt'), new RoleGuard(CONSTANTS.ROLES.ANDROID_DEVELOPER))
   androidDeveloperData(): string {
     return 'android-developer';
+  }
+
+  @Get('/web-developer')
+  @UseGuards(AuthGuard('jwt'), new RoleGuard(CONSTANTS.ROLES.WEB_DEVELOPER))
+  webDeveloperData(): string {
+    return 'web-developer';
   }
 }
