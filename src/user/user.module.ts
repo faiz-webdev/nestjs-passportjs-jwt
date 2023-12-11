@@ -1,5 +1,6 @@
 import { Module } from '@nestjs/common';
 import { UserService } from './user.service';
+import { ConfigService } from '@nestjs/config';
 
 @Module({
   imports: [],
@@ -7,4 +8,9 @@ import { UserService } from './user.service';
   providers: [UserService],
   exports: [UserService],
 })
-export class UserModule {}
+export class UserModule {
+  constructor(private readonly configService: ConfigService) {
+    console.log('user module', configService.get<Number>('PORT'));
+    console.log('user module', configService.get<string>('NAME'));
+  }
+}

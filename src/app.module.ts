@@ -10,7 +10,7 @@ import { ConfigModule } from '@nestjs/config';
     UserModule,
     ConfigModule.forRoot({
       isGlobal: true,
-      envFilePath: '.local.env',
+      envFilePath: '.prod.env',
     }),
   ],
   controllers: [AppController],
