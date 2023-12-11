@@ -25,6 +25,11 @@ export class UserController {
     return this.userService.findAll();
   }
 
+  @Get('/age/:age')
+  findUserByAge(@Param('age') age: string) {
+    return this.userService.findUserByAge(+age);
+  }
+
   @Get(':id')
   findOne(@Param('id') id: string) {
     return this.userService.findOne(+id);

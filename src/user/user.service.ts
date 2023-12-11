@@ -1,16 +1,12 @@
-import { Inject, Injectable } from '@nestjs/common';
+import { Injectable } from '@nestjs/common';
 import { User } from './entities/user.entity';
-import { CONSTANTS } from 'src/constants';
-import { Repository } from 'typeorm';
-import { InjectRepository } from '@nestjs/typeorm';
 import { CreateUserDto } from './dto/create-user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { UserRepository } from './repository/user.repository';
 
 @Injectable()
 export class UserService {
-  constructor(
-    @InjectRepository(User) private readonly userRepository: Repository<User>,
-  ) {}
+  constructor(private readonly userRepository: UserRepository) {}
 
   create(createUserDto: CreateUserDto): Promise<User> {
     const user: User = new User();
@@ -20,6 +16,10 @@ export class UserService {
     user.email = createUserDto.email;
 
     return this.userRepository.save(user);
+  }
+
+  findUserByAge(age: number) {
+    return this.userRepository.getUserByAge(age);
   }
 
   findAll(): Promise<User[]> {
