@@ -12,4 +12,10 @@ export class AppController {
     const token = this.authserService.generateToken(req.user);
     return token;
   }
+
+  @Get('/android-developer')
+  @UseGuards(AuthGuard('jwt'))
+  androidDeveloperData(): string {
+    return 'android-developer';
+  }
 }
